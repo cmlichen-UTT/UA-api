@@ -17,8 +17,8 @@ import rateLimiter from './middlewares/rateLimiter';
 
 const app = express();
 
-// Handle rate limiter first
-app.use(rateLimiter);
+// Handle rate limiter first, do not enable it in tests !
+if (!env.test) app.use(rateLimiter);
 
 // Initiate Sentry
 Sentry.init({ dsn: env.log.sentryDsn, environment: env.environment });
