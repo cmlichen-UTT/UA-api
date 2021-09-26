@@ -45,6 +45,7 @@
     "prisma-dbml-generator": "^0.7.0",
     "qrcode": "^1.4.4",
     "qs": "^6.10.1",
+    "rate-limiter-flexible": "^2.2.4",
     "split": "^1.0.1",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6",

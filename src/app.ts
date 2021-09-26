@@ -13,8 +13,12 @@ import env from './utils/env';
 import errorHandler from './middlewares/errorHandler';
 import { enforceQueryString, validateParameter } from './middlewares/validation';
 import * as validators from './utils/validators';
+import rateLimiter from './middlewares/rateLimiter';
 
 const app = express();
+
+// Handle rate limiter first
+app.use(rateLimiter);
 
 // Initiate Sentry
 Sentry.init({ dsn: env.log.sentryDsn, environment: env.environment });
