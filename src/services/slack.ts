@@ -1,3 +1,4 @@
+import { Tournament } from '.prisma/client';
 import { WebClient } from '@slack/web-api';
 import { Contact } from '../types';
 import env from '../utils/env';
@@ -7,7 +8,7 @@ const slack = new WebClient(env.slack.token);
 /**
  * Sends a Slack message contact
  */
-export const sendSlackContact = ({ name, email, subject, message }: Contact) =>
+export const sendSlackContact = ({ name, email, subject, message }: Contact) => {
   slack.chat.postMessage({
     channel: env.slack.contactChannel,
     text: message,
@@ -32,3 +33,11 @@ export const sendSlackContact = ({ name, email, subject, message }: Contact) =>
     ],
     username: 'UTT Arena - Contact',
   });
+};
+
+export const sendSlackAnimation = (teamName: string, tournament: Tournament) => {
+  slack.chat.postMessage({
+    channel: tournament.slackChannelId,
+    text: `The team ${teamName} locked their team for ${tournament}`,
+  });
+};

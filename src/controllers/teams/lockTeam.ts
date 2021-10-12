@@ -6,6 +6,8 @@ import { fetchTournament } from '../../operations/tournament';
 import { Error } from '../../types';
 import { filterTeam } from '../../utils/filters';
 import { getRequestInfo } from '../../utils/users';
+import { sendSlackAnimation } from '../../services/slack';
+import { WebClient } from '@slack/web-api';
 
 export default [
   // Middlewares
@@ -13,6 +15,7 @@ export default [
   isTeamNotLocked,
 
   // Controller
+
   async (request: Request, response: Response, next: NextFunction) => {
     try {
       const { team } = getRequestInfo(response);
@@ -34,7 +37,7 @@ export default [
       }
 
       const lockedTeam = await lockTeam(team.id);
-
+      sendSlackAnimation(team.id, tournament);
       return success(response, filterTeam(lockedTeam));
     } catch (error) {
       return next(error);
