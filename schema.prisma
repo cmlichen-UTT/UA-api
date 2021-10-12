@@ -86,6 +86,7 @@ model Tournament {
   maxPlayers             Int
   playersPerTeam         Int
   toornamentId           String?
+  slackChannelId         String?
   discordRoleId          String?
   discordStaffRoleId     String?
   discordVocalCategoryId String?
